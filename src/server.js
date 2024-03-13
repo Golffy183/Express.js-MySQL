@@ -12,16 +12,16 @@ import userRouther from "./routes/user.js";
 dotenv.config();
 
 const app = express();
-const port = parseInt(process.env.SERVER_PORT || 4000);
+// const port = parseInt(process.env.SERVER_PORT || 4000);
 
-console.log("Server is running on port", port);
+// console.log("Server is running on port", port);
 app.use(cors({
     credentials: true,
-    origin: ["http://localhost:5173", "https://localhost:5173"]
+    origin: ["https://pin-chatting.web.app/"]
 }));
 
 app.use((req, res, next) => {
-    const allowedOrigins = ["http://localhost:5173", "https://localhost:5173"];
+    const allowedOrigins = ["https://pin-chatting.web.app/"];
     const origin = req.headers.origin;
     if (allowedOrigins.includes(origin)) {
         res.setHeader("Access-Control-Allow-Origin", origin);
@@ -32,6 +32,7 @@ app.use((req, res, next) => {
     next();
 })
 
+app.use(morgan('dev'));
 app.use(helmet());
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
@@ -42,8 +43,8 @@ app.use("/api/user", userRouther);
 
 app.use(ErrorHandling);
 
-app.listen(port, () => {
-    console.log("Server is running on port", port);
-});
+// app.listen(port, () => {
+//     console.log("Server is running on port", port);
+// });
 
 export default app;
