@@ -3,11 +3,12 @@ import cookieParser from "cookie-parser";
 import cors from "cors";
 import bodyParser from "body-parser";
 import * as dotenv from "dotenv";
-import { ErrorHandling } from "./core/universal-helper/utils/utils.js";
+import { ErrorHandling } from "./src/core/universal-helper/utils/utils.js";
 import helmet from "helmet";
+import morgan from "morgan";
 
-import authRouter from "./routes/auth.js";
-import userRouther from "./routes/user.js";
+import authRouter from "./src/routes/auth.js";
+import userRouther from "./src/routes/user.js";
 
 dotenv.config();
 
@@ -46,5 +47,3 @@ app.use(ErrorHandling);
 app.listen(port, () => {
     console.log("Server is running on port", port);
 });
-
-export default app;
