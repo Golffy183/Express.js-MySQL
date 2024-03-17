@@ -12,7 +12,7 @@ import userRouther from "./routes/user.js";
 dotenv.config();
 
 const app = express();
-// const port = parseInt(process.env.SERVER_PORT || 4000);
+const port = parseInt(process.env.SERVER_PORT || 4000);
 
 // console.log("Server is running on port", port);
 app.use(cors({
@@ -43,8 +43,8 @@ app.use("/api/user", userRouther);
 
 app.use(ErrorHandling);
 
-// app.listen(port, () => {
-//     console.log("Server is running on port", port);
-// });
+app.listen(port, () => {
+    console.log("Server is running on port", port);
+});
 
 export default app;
