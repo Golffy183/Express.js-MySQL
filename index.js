@@ -15,23 +15,11 @@ dotenv.config();
 const app = express();
 const port = parseInt(process.env.SERVER_PORT || 4000);
 
-// console.log("Server is running on port", port);
 app.use(cors({
-    credentials: true,
-    origin: ["https://pin-chatting.web.app/"]
+    origin: 'https://pin-chatting.web.app',
+    methods: ['GET', 'POST', 'PUT', 'DELETE'],
+    credentials: true
 }));
-
-app.use((req, res, next) => {
-    const allowedOrigins = ["https://pin-chatting.web.app/"];
-    const origin = req.headers.origin;
-    if (allowedOrigins.includes(origin)) {
-        res.setHeader("Access-Control-Allow-Origin", origin);
-    }
-    res.setHeader("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
-    res.setHeader("Access-Control-Allow-Methods", "GET, POST, PUT, DELETE");
-    res.setHeader("Access-Control-Allow-Credentials", true);
-    next();
-})
 
 app.use(morgan('dev'));
 app.use(helmet());
